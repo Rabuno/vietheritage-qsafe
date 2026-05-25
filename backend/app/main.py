@@ -1,5 +1,10 @@
 from fastapi import FastAPI
 from .config import settings
+from .db import engine, Base
+from . import models
+
+# Initialize database
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title=settings.APP_NAME)
 
