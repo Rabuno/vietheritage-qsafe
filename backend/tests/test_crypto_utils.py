@@ -17,6 +17,17 @@ def test_canonical_json():
     assert to_canonical_json(d1) == to_canonical_json(d2)
     assert to_canonical_json(d1) == b'{"a":1,"b":2}'
 
+def test_canonical_json_with_datetime():
+    import datetime
+    dt = datetime.datetime(2024, 5, 23, 10, 30, 0)
+    d = {"date": dt, "label": "event"}
+    expected = b'{"date":"2024-05-23T10:30:00","label":"event"}'
+    assert to_canonical_json(d) == expected
+
+    date_only = datetime.date(2024, 5, 23)
+    d2 = {"date": date_only}
+    assert to_canonical_json(d2) == b'{"date":"2024-05-23"}'
+
 def test_metadata_hash():
     from app.services.hash_service import compute_metadata_hash
     metadata = {"title": "Trống đồng", "category": "TANGIBLE"}
