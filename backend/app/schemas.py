@@ -13,10 +13,29 @@ class AssetBase(BaseModel):
 class AssetCreate(AssetBase):
     signer_algorithm: str = "RSA-PSS-3072"
 
+class CertificateResponse(BaseModel):
+    id: str
+    signature_algorithm: str
+    signature_b64: str
+    public_key_b64: str
+    public_key_fingerprint: str
+    manifest_json: str
+    signature_size_bytes: int
+    verification_status: str
+    signed_at: datetime
+
+    class Config:
+        from_attributes = True
+
 class AssetResponse(AssetBase):
     id: str
     sha256: str
+    sha3_256: str
+    metadata_hash: str
+    file_size_bytes: int
+    mime_type: str
     created_at: datetime
+    certificates: List[CertificateResponse] = []
     
     class Config:
         from_attributes = True
@@ -44,3 +63,11 @@ class BenchmarkResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ManifestVerifyRequest(BaseModel):
+    asset_id: str
+    manifest_json: str
+
+class VerificationResponse(BaseModel):
+    valid: bool
+    message: str

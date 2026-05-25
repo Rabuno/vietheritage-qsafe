@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --accent: #aa3bff;
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Playfair Display', serif; /* Vietnamese theme feel */
+  --mono: ui-monospace, Consolas, monospace;
+}
+
+@theme {
+  --color-heritage-red: #8B0000;
+  --color-heritage-gold: #D4AF37;
+  --color-heritage-parchment: #F5F5DC;
+  --color-heritage-slate: #2F4F4F;
+}
+
+body {
+  @apply bg-stone-50 text-stone-900 font-sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif font-semibold;
+}

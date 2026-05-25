@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 from sqlalchemy import Column, String, Integer, Float, DateTime, Text, ForeignKey, Boolean
+from sqlalchemy.orm import relationship
 from .db import Base
 
 class HeritageAsset(Base):
@@ -20,6 +21,8 @@ class HeritageAsset(Base):
     sha3_256 = Column(String)
     metadata_hash = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    certificates = relationship("Certificate", backref="asset", cascade="all, delete-orphan")
 
 class Certificate(Base):
     __tablename__ = "certificates"
